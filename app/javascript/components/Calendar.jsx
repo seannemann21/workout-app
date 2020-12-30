@@ -44,7 +44,7 @@ const Calendar = () => {
       </div>
       <div className="flex fit-content">
         {daysOfWeek.map((day) => (
-          <div className="w-20 h-12 flex justify-center items-center text-xl">
+          <div className="w-24 h-12 flex justify-center items-center text-xl">
             {day}
           </div>
         ))}
@@ -53,7 +53,7 @@ const Calendar = () => {
         <div className="flex week-row fit-content">
           {datesByWeek.map((date) => (
             <div
-              className={`w-20 h-24 flex justify-center items-center text-xl border-b-4 border-r-4 first:border-l-4 ${
+              className={`w-24 h-28 flex justify-center items-center text-xl border-b-4 border-r-4 first:border-l-4 ${
                 row == 0 && "border-t-4"
               }`}
             >
