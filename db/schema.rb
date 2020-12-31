@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_12_31_032850) do
     t.integer "user_id"
     t.string "workout_type"
     t.datetime "start_time"
+    t.boolean "completed"
   end
 
 end
