@@ -1,0 +1,22 @@
+Users
+email
+
+Workout
+User ID
+Type
+Start Time
+
+Strength Exercise
+Name
+Workout ID
+
+Set
+Exercise ID
+Reps
+Weight
+Duration
+
+Cardio Excercise
+Workout ID
+Distance
+Duration
