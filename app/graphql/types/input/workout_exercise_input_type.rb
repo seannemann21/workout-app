@@ -1,8 +1,8 @@
 module Types
   module Input
-    class WorkoutExerciseType < Types::BaseInputObject
-      field :workout_id, ID, null: false
-      field :exercise_id, ID, null: false
+    class WorkoutExerciseInputType < Types::BaseInputObject
+      argument :workout_id, ID, required: true
+      argument :exercise_id, ID, required: true
     end
   end
 end

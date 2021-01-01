@@ -2,9 +2,9 @@ module Types
   module Input
     class WorkoutInputType < Types::BaseInputObject
       argument :email, String, required: true
-      field :user_id, ID, null: false
-      field :workout_type, String, null: false
-      field :completed, Boolean, null: false
+      argument :user_id, ID, required: true
+      argument :workout_type, String, required: true
+      argument :completed, Boolean, required: true
     end
   end
 end

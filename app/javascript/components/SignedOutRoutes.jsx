@@ -7,11 +7,11 @@ import SignIn from './SignIn'
 import SignUp from './SignUp'
 import About  from './About'
 
-const SignedOutRoutes = () => {
+const SignedOutRoutes = ({setUser}) => {
   return (
         <Switch>
           <Route path="/sign-in">
-            <SignIn />
+            <SignIn setUser={setUser} />
           </Route>
           <Route path="/sign-up">
             <SignUp />
