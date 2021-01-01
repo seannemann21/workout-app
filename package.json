@@ -2,6 +2,7 @@
   "name": "workout_app",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.3.6",
     "@babel/preset-react": "^7.12.10",
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
@@ -15,6 +16,7 @@
     "autoprefixer": "^9",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "date-fns": "^2.16.1",
+    "graphql": "^15.4.0",
     "postcss": "^7",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
