@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+  end
+
+  post "/graphql", to: "graphql#execute"
+
   root 'homepage#index'
   get 'new-workout', to: 'homepage#index'
   get 'exercises', to: 'homepage#index'
