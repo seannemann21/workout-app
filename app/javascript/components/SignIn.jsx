@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { useLazyQuery, gql } from "@apollo/client";
+import { useUserSession } from './userSesssion'
 
 const GET_USER_QUERY = gql`
   query {
@@ -12,6 +13,7 @@ const GET_USER_QUERY = gql`
 `;
 
 const SignInForm = ({ setUser }) => {
+  const { signUserIn } = useUserSession();
   const [getUser, { loading, data }] = useLazyQuery(GET_USER_QUERY);
 
   const formik = useFormik({
@@ -23,10 +25,12 @@ const SignInForm = ({ setUser }) => {
     },
   });
 
-  if (data && !data.errors) {
-    setUser(data.fetchUser.user);
-  }
-
+  useEffect(() => {
+    if (data && !data.errors) {
+      signUserIn(data.fetchUser);
+    }
+  }, [data])
+  
   return (
     <div className="flex justify-center">
       <div className="text-2xl mt-52">

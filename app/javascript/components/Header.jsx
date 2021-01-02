@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useUserSession } from "./userSesssion"
 
 const Header = () => {
+  const { signUserOut } = useUserSession()
   const headers = [
     { text: "Home", path: "/" },
     { text: "Workouts", path: "/workouts" },
@@ -18,6 +20,9 @@ const Header = () => {
           </div>
         ))}
       </div>
+      <button onClick={signUserOut}>
+          Sign Out
+      </button>
     </div>
   );
 };
