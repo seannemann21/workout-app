@@ -5,5 +5,7 @@ module Types
 
     field :fetch_users, resolver: Queries::FetchUsers
     field :fetch_user, resolver: Queries::FetchUser
+    field :fetch_workout, resolver: Queries::FetchWorkout
+    field :fetch_exercises, resolver: Queries::FetchExercises
   end
 end

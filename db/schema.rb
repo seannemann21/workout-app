@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2021_01_01_170542) do
 
   create_table "exercises", force: :cascade do |t|
     t.string "name"
+    t.string "workout_type"
     t.boolean "cardio"
   end
 

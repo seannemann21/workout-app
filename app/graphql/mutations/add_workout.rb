@@ -2,11 +2,11 @@ module Mutations
   class AddWorkout < Mutations::BaseMutation
     argument :params, Types::Input::WorkoutInputType, required: true
 
-    field :user, Types::WorkoutType, null: false
+    field :workout, Types::WorkoutType, null: false
 
     def resolve(params:)
       workout_params = Hash params
-
+      workout_params[:start_time] ||= Time.current
       begin
         workout = Workout.create!(workout_params)
 

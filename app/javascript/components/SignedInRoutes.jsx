@@ -7,6 +7,7 @@ import Home from './Home'
 import WorkoutFlow from './WorkoutFlow'
 import Workouts from './Workouts'
 import Exercises from './Exercises'
+import WorkoutBuilder from './WorkoutBuilder'
 
 
 const SignedInRoutes = () => {
@@ -21,6 +22,9 @@ const SignedInRoutes = () => {
         </Route>
         <Route path="/new-workout">
           <WorkoutFlow />
+        </Route>
+        <Route path="/build-workout/:id">
+          <WorkoutBuilder />
         </Route>
         <Route path="/">
           <Home />

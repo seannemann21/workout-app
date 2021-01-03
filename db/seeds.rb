@@ -10,27 +10,27 @@
   User.create(email: "user#{i + 1}@gmail.com")
 end
 
-jim = User.create(email: "jim@gmail.com")
+sean = User.create(email: 'sean@gmail.com')
 
-strength_workout = Workout.create(user: jim, workout_type: 'strength', start_time: DateTime.new(2020, 12, 30, 18), completed: true)
+strength_workout = Workout.create(user: sean, workout_type: 'strength', start_time: DateTime.new(2020, 12, 30, 18), completed: true)
 
-bench = Exercise.create(name: 'bench press', cardio: false)
-jims_bench = WorkoutExercise.create(exercise: bench, workout: strength_workout)
-StrengthSet.create(workout_exercise: jims_bench, reps: 8, lbs: 135)
-StrengthSet.create(workout_exercise: jims_bench, reps: 8, lbs: 155)
-StrengthSet.create(workout_exercise: jims_bench, reps: 5, lbs: 175)
-StrengthSet.create(workout_exercise: jims_bench, reps: 4, lbs: 175)
+bench = Exercise.create(name: 'bench press', workout_type: 'strength', cardio: false)
+users_bench = WorkoutExercise.create(exercise: bench, workout: strength_workout)
+StrengthSet.create(workout_exercise: users_bench, reps: 8, lbs: 135)
+StrengthSet.create(workout_exercise: users_bench, reps: 8, lbs: 155)
+StrengthSet.create(workout_exercise: users_bench, reps: 5, lbs: 175)
+StrengthSet.create(workout_exercise: users_bench, reps: 4, lbs: 175)
 
-inclined_bench = Exercise.create(name: 'inclined bench press', cardio: false)
-jims_inclined_bench = WorkoutExercise.create(exercise: inclined_bench, workout: strength_workout)
+inclined_bench = Exercise.create(name: 'inclined bench press', workout_type: 'strength', cardio: false)
+users_inclined_bench = WorkoutExercise.create(exercise: inclined_bench, workout: strength_workout)
 
-StrengthSet.create(workout_exercise: jims_inclined_bench, reps: 6, lbs: 135)
-StrengthSet.create(workout_exercise: jims_inclined_bench, reps: 7, lbs: 135)
-StrengthSet.create(workout_exercise: jims_inclined_bench, reps: 6, lbs: 135)
+StrengthSet.create(workout_exercise: users_inclined_bench, reps: 6, lbs: 135)
+StrengthSet.create(workout_exercise: users_inclined_bench, reps: 7, lbs: 135)
+StrengthSet.create(workout_exercise: users_inclined_bench, reps: 6, lbs: 135)
 
-cardio_workout = Workout.create(workout_type: 'cardio', start_time: DateTime.new(2020, 12, 31, 14), completed: true)
+cardio_workout = Workout.create(user: sean, workout_type: 'cardio', start_time: DateTime.new(2020, 12, 31, 14), completed: true)
 
-running = Exercise.create(name: 'running', cardio: true)
-jims_cardio = WorkoutExercise.create(exercise: running, workout: cardio_workout)
-CardioSet.create(workout_exercise: jims_cardio, distance: 40, duration: 40)
+running = Exercise.create(name: 'running', workout_type: 'cardio', cardio: true)
+users_cardio = WorkoutExercise.create(exercise: running, workout: cardio_workout)
+CardioSet.create(workout_exercise: users_cardio, distance: 40, duration: 40)
 

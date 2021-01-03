@@ -6,5 +6,6 @@ module Types
     field :start_time, GraphQL::Types::ISO8601DateTime, null: false
     field :completed, Boolean, null: false
     field :workout_exercises, [Types::WorkoutExerciseType], null: true
+    field :possible_exercises, [Types::ExerciseType], null: false
   end
 end
