@@ -8,7 +8,7 @@ const UserSessionContext = React.createContext({
 
 const UserSessionProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(() =>
-    sessionStorage.getItem("currentUser")
+    JSON.parse(sessionStorage.getItem("currentUser"))
   );
 
   return (
@@ -36,9 +36,9 @@ const useUserSession = () => {
     userSession.setCurrentUser(null)
   }
   const userSignedIn = !!userSession.currentUser
-  const getCurrentUser = () => JSON.parse(userSession.currentUser)
+  const currentUser = userSession.currentUser
 
-  return { getCurrentUser, userSignedIn, signUserIn, signUserOut }
+  return { currentUser, userSignedIn, signUserIn, signUserOut }
 };
 
 export { UserSessionProvider, useUserSession }

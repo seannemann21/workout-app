@@ -4,7 +4,7 @@ import { useQuery, gql } from "@apollo/client";
 
 const WORKOUTS = gql`
   query {
-    fetchUser(id: "6") {
+    fetchUser(email: "sean@gmail.com") {
       workouts {
         id
         startTime

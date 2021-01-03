@@ -3,9 +3,8 @@ import Calendar from "./Calendar";
 import { useUserSession } from './userSesssion';
 
 export default () => {
-  const { getCurrentUser } = useUserSession()
-  const user = getCurrentUser()
-  const message = `Welcome ${user.email}`
+  const { currentUser } = useUserSession()
+  const message = `Welcome ${currentUser.email}`
 
   return (
     <div>

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { useLazyQuery, gql } from "@apollo/client";
-import { useUserSession } from './userSesssion'
+import { useUserSession } from "./userSesssion";
 
 const GET_USER_QUERY = gql`
-  query {
-    fetchUser(email: "sean@gmail.com") {
+  query($email: String!) {
+    fetchUser(email: $email) {
       id
       email
     }
@@ -29,8 +29,8 @@ const SignInForm = ({ setUser }) => {
     if (data && !data.errors) {
       signUserIn(data.fetchUser);
     }
-  }, [data])
-  
+  }, [data]);
+
   return (
     <div className="flex justify-center">
       <div className="text-2xl mt-52">
