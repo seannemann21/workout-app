@@ -3,7 +3,7 @@ import { useQuery, gql } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faDumbbell } from "@fortawesome/free-solid-svg-icons";
-import AddExercise from "./AddExercise";
+import AddWorkoutExercise from "./AddWorkoutExercise";
 
 const GET_WORKOUT_QUERY = gql`
   query($id: ID!) {
@@ -33,7 +33,7 @@ const WorkoutBuilder = () => {
   const [workout, setWorkout] = useState();
   const [selectedExercise, setSelectedExercise] = useState();
   let { id } = useParams();
-  const { data } = useQuery(GET_WORKOUT_QUERY, {
+  const { data, refetch } = useQuery(GET_WORKOUT_QUERY, {
     variables: { id },
   });
 
@@ -49,9 +49,11 @@ const WorkoutBuilder = () => {
 
   if (selectedExercise) {
     return (
-      <AddExercise
+      <AddWorkoutExercise
+        workoutId={workout.id}
         exercise={selectedExercise}
         back={() => {
+          refetch()
           setSelectedExercise(null);
         }}
       />
