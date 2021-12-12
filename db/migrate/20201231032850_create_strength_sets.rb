@@ -5,6 +5,8 @@ class CreateStrengthSets < ActiveRecord::Migration[6.0]
       t.integer :reps
       t.integer :lbs
       t.integer :duration
+
+      t.timestamps
     end
   end
 end

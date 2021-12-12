@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useQuery, gql } from "@apollo/client";
+import { Redirect } from "react-router-dom";
+import { useQuery, useMutation, gql } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faDumbbell } from "@fortawesome/free-solid-svg-icons";
 import AddWorkoutExercise from "./AddWorkoutExercise";
+import { useUserSession } from "./userSesssion";
 
 const GET_WORKOUT_QUERY = gql`
   query($id: ID!) {
     fetchWorkout(id: $id) {
       id
-      startTime
+      startedAt
       workoutType
       possibleExercises {
         id
@@ -29,19 +31,42 @@ const GET_WORKOUT_QUERY = gql`
   }
 `;
 
+const COMPLETE_WORKOUT = gql`
+  mutation($id: ID!) {
+    completeWorkout(input: { id: $id }) {
+      workout {
+        id
+      }
+    }
+  }
+`;
+
 const WorkoutBuilder = () => {
+  const { updateCurrentWorkout } = useUserSession()
   const [workout, setWorkout] = useState();
   const [selectedExercise, setSelectedExercise] = useState();
-  let { id } = useParams();
+  const { id } = useParams();
   const { data, refetch } = useQuery(GET_WORKOUT_QUERY, {
     variables: { id },
   });
+  const [sendCompleteWorkout, { data: completedData }] = useMutation(
+    COMPLETE_WORKOUT
+  );
 
   useEffect(() => {
     if (data) {
       setWorkout(data.fetchWorkout);
     }
   }, [data]);
+
+  if (completedData) {
+    updateCurrentWorkout(null)
+    return <Redirect to="/" />;
+  }
+
+  const completeWorkout = () => {
+    sendCompleteWorkout({ variables: { id } });
+  };
 
   if (!workout) {
     return <div>loading...</div>;
@@ -53,7 +78,7 @@ const WorkoutBuilder = () => {
         workoutId={workout.id}
         exercise={selectedExercise}
         back={() => {
-          refetch()
+          refetch();
           setSelectedExercise(null);
         }}
       />
@@ -62,7 +87,7 @@ const WorkoutBuilder = () => {
 
   return (
     <div>
-      <div>{workout.startTime}</div>
+      <div>{workout.startedAt}</div>
       {workout.workoutExercises.map((workoutExercise) => (
         <div>
           <div>{workoutExercise.exercise.name}</div>
@@ -76,6 +101,7 @@ const WorkoutBuilder = () => {
           </div>
         </div>
       ))}
+      <button onClick={completeWorkout}>Complete Workout</button>
       <div>Add Exercise</div>
       {workout.possibleExercises.map((exercise) => (
         <div>

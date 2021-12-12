@@ -6,7 +6,7 @@ module Mutations
 
     def resolve(params:)
       workout_params = Hash params
-      workout_params[:start_time] ||= Time.current
+      workout_params[:started_at] ||= Time.current
       begin
         workout = Workout.create!(workout_params)
 

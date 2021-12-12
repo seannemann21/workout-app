@@ -4,6 +4,8 @@ class CreateCardioSets < ActiveRecord::Migration[6.0]
       t.integer :workout_exercise_id
       t.integer :distance
       t.integer :duration
+
+      t.timestamps
     end
   end
 end

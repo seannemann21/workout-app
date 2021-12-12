@@ -3,8 +3,10 @@ class CreateWorkouts < ActiveRecord::Migration[6.0]
     create_table :workouts do |t|
       t.integer :user_id
       t.string :workout_type
-      t.datetime :start_time
-      t.boolean :completed
+      t.datetime :started_at
+      t.datetime :completed_at
+
+      t.timestamps
     end
   end
 end

@@ -10,7 +10,7 @@ export default () => {
     <div>
       <div>{message}</div>
       <div className="flex ">
-        <div className="w-96 h-screen hidden lg:block shadow-md">
+        <div className="w-96 h-screen shadow-md flex-grow lg:flex-grow-0">
           <div className="my-6 mt-2 mx-2 shadow-md rounded-md p-2 bg-white">
             <div>6:30 PM 12/29/2020</div>
             <div>45 minutes</div>
@@ -22,7 +22,7 @@ export default () => {
             <div>Legs</div>
           </div>
         </div>
-        <div className="flex-grow">
+        <div className="flex-grow hidden lg:block">
           <div className="mt-8 flex justify-center">
             <Calendar />
           </div>

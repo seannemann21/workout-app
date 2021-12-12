@@ -8,6 +8,9 @@ const GET_USER_QUERY = gql`
     fetchUser(email: $email) {
       id
       email
+      currentWorkout{
+        id
+      }
     }
   }
 `;

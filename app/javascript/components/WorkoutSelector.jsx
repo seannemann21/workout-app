@@ -9,7 +9,7 @@ const CREATE_WORKOUT_QUERY = gql`
   mutation($userId: ID!, $workoutType: String!) {
     addWorkout(
       input: {
-        params: { userId: $userId, workoutType: $workoutType, completed: false }
+        params: { userId: $userId, workoutType: $workoutType, completedAt: null }
       }
     ) {
       workout {
@@ -33,7 +33,7 @@ const Card = ({ description, icon }) => (
 );
 
 const WorkoutSelector = () => {
-  const { currentUser } = useUserSession();
+  const { currentUser, updateCurrentWorkout } = useUserSession();
   const [createWorkout, { data }] = useMutation(CREATE_WORKOUT_QUERY);
 
   const selectWorkout = (workoutType) => {
@@ -43,6 +43,7 @@ const WorkoutSelector = () => {
   };
 
   if (data) {
+    updateCurrentWorkout(data.addWorkout.workout)
     return <Redirect to={`/build-workout/${data.addWorkout.workout.id}`} />;
   }
 

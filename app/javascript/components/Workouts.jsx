@@ -7,7 +7,7 @@ const WORKOUTS = gql`
     fetchUser(email: "sean@gmail.com") {
       workouts {
         id
-        startTime
+        startedAt
         workoutExercises {
           exercise {
             name
@@ -37,7 +37,7 @@ const Workouts = () => {
       <div>Workouts</div>
       {workouts.map((workout) => (
         <div>
-          <div>{workout.startTime}</div>
+          <div>{workout.startedAt}</div>
           {workout.workoutExercises.map((workoutExercise) => (
             <div>
               <div>{workoutExercise.exercise.name}</div>

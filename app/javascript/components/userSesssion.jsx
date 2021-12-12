@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useSessionStorage } from 'react-use';
+import { useSessionStorage } from "react-use";
 
 const UserSessionContext = React.createContext({
   currentUser: null,
@@ -19,26 +19,42 @@ const UserSessionProvider = ({ children }) => {
 };
 
 const useUserSession = () => {
-  const userSession = useContext(UserSessionContext)
+  const userSession = useContext(UserSessionContext);
 
   useEffect(() => {
-    if(userSession.currentUser) {
-      sessionStorage.setItem("currentUser", JSON.stringify(userSession.currentUser))
+    if (userSession.currentUser) {
+      sessionStorage.setItem(
+        "currentUser",
+        JSON.stringify(userSession.currentUser)
+      );
     } else {
-      sessionStorage.removeItem("currentUser")
+      sessionStorage.removeItem("currentUser");
     }
-  }, [userSession.currentUser])
+  }, [userSession.currentUser]);
 
-  const signUserIn = user => {
-    userSession.setCurrentUser(user)
-  }
+  const signUserIn = (user) => {
+    userSession.setCurrentUser(user);
+  };
   const signUserOut = () => {
-    userSession.setCurrentUser(null)
-  }
-  const userSignedIn = !!userSession.currentUser
-  const currentUser = userSession.currentUser
+    userSession.setCurrentUser(null);
+  };
+  const userSignedIn = !!userSession.currentUser;
+  const currentUser = userSession.currentUser;
 
-  return { currentUser, userSignedIn, signUserIn, signUserOut }
+  const updateCurrentWorkout = (workout) => {
+    userSession.setCurrentUser({
+      ...userSession.currentUser,
+      ...{ currentWorkout: workout },
+    });
+  };
+
+  return {
+    currentUser,
+    userSignedIn,
+    signUserIn,
+    signUserOut,
+    updateCurrentWorkout,
+  };
 };
 
-export { UserSessionProvider, useUserSession }
+export { UserSessionProvider, useUserSession };

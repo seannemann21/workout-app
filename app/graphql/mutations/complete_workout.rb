@@ -5,12 +5,10 @@ module Mutations
     field :workout, Types::WorkoutType, null: false
 
     def resolve(id:)
-      begin
-        workout = Workout.find(id)
-        workout.update(complete: true)
+      workout = Workout.find(id)
+      workout.update(completed_at: Time.current)
 
-        { workout: workout }
-      end
+      { workout: workout }
     end
   end
 end

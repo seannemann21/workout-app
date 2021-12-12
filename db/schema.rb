@@ -16,12 +16,16 @@ ActiveRecord::Schema.define(version: 2021_01_01_170542) do
     t.integer "workout_exercise_id"
     t.integer "distance"
     t.integer "duration"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "exercises", force: :cascade do |t|
     t.string "name"
     t.string "workout_type"
     t.boolean "cardio"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "strength_sets", force: :cascade do |t|
@@ -29,22 +33,30 @@ ActiveRecord::Schema.define(version: 2021_01_01_170542) do
     t.integer "reps"
     t.integer "lbs"
     t.integer "duration"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "workout_exercises", force: :cascade do |t|
     t.integer "workout_id"
     t.integer "exercise_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "workouts", force: :cascade do |t|
     t.integer "user_id"
     t.string "workout_type"
-    t.datetime "start_time"
-    t.boolean "completed"
+    t.datetime "started_at"
+    t.datetime "completed_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

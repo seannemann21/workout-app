@@ -1,14 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useUserSession } from "./userSesssion"
+import { useUserSession } from "./userSesssion";
 
 const Header = () => {
-  const { signUserOut } = useUserSession()
+  const { currentUser, signUserOut } = useUserSession();
+  const currentWorkout = currentUser.currentWorkout;
   const headers = [
     { text: "Home", path: "/" },
     { text: "Workouts", path: "/workouts" },
     { text: "Exercises", path: "/exercises" },
-    { text: "New Workout", path: "/new-workout" },
+    (currentWorkout
+      ? { text: "Continue Workout", path: `/build-workout/${currentWorkout.id}` }
+      : { text: "New Workout", path: "/new-workout" }),
   ];
 
   return (
@@ -20,11 +23,9 @@ const Header = () => {
           </div>
         ))}
       </div>
-      <button onClick={signUserOut}>
-          Sign Out
-      </button>
+      <button onClick={signUserOut}>Sign Out</button>
     </div>
   );
 };
 
-export default Header
+export default Header;
