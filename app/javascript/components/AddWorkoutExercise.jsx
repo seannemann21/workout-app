@@ -3,7 +3,7 @@ import { Formik, Form, Field, FieldArray } from "formik";
 import { useMutation, gql } from "@apollo/client";
 
 const CREATE_WORKOUT_EXERCISE_QUERY = gql`
-  mutation(
+  mutation (
     $workoutId: ID!
     $exerciseId: ID!
     $strengthSets: [StrengthSetInput!]
@@ -36,8 +36,10 @@ const AddWorkoutExercise = ({ workoutId, back, exercise }) => {
   }, [data]);
 
   return (
-    <div>
-      {exercise.name}
+    <div className="flex items-center flex-col">
+      <div>
+        <h1>{exercise.name}</h1>
+      </div>
       <Formik
         initialValues={{ exerciseSets: [{ lbs: 0, reps: 0 }] }}
         onSubmit={(values) => {
@@ -55,40 +57,60 @@ const AddWorkoutExercise = ({ workoutId, back, exercise }) => {
       >
         {({ values }) => (
           <Form>
-            <FieldArray
-              name="exerciseSets"
-              render={(arrayHelpers) => (
-                <div>
-                  {values.exerciseSets.map((exerciseSet, index) => (
-                    <div key={index}>
-                      <Field name={`exerciseSets[${index}].lbs`} />
-                      <Field name={`exerciseSets[${index}].reps`} />
-                      <button
-                        type="button"
-                        onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
-                      >
-                        -
-                      </button>
-                    </div>
-                  ))}
-                  <button
-                    type="button"
-                    onClick={() => arrayHelpers.push({ lbs: 0, reps: 0 })}
-                  >
-                    +
-                  </button>
+            <div>
+              <FieldArray
+                name="exerciseSets"
+                render={(arrayHelpers) => (
                   <div>
-                    <button type="submit">Submit</button>
+                    <label
+                      id="reps-label"
+                      className="w-12 mr-4 inline-block"
+                    >
+                      Reps
+                    </label>
+                    <label id="lbs-label">Lbs</label>
+                    {values.exerciseSets.map((exerciseSet, index) => (
+                      <div key={index}>
+                        <Field
+                          name={`exerciseSets[${index}].reps`}
+                          className="border-b-4 focus:outline-none focus:border-blue-300  w-12 mr-4"
+                          aria-labelledby="reps-label"
+                        />
+                        <Field
+                          name={`exerciseSets[${index}].lbs`}
+                          className="border-b-4 focus:outline-none focus:border-blue-300"
+                          aria-labelledby="lbs-label"
+                        />
+
+                        <button
+                          type="button"
+                          onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                          className="font-bold"
+                        >
+                          -
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => arrayHelpers.push({ lbs: 0, reps: 0 })}
+                      className="font-bold w-full my-6 float-right bg-green-300 hover:bg-green-500 px-2 py-1 rounded-md"
+                    >
+                      +
+                    </button>
+                    <div>
+                      <button onClick={back}>Back</button>
+                    </div>
+                    <div>
+                      <button type="submit">Submit</button>
+                    </div>
                   </div>
-                </div>
-              )}
-            />
+                )}
+              />
+            </div>
           </Form>
         )}
       </Formik>
-      <div>
-        <button onClick={back}>Back</button>
-      </div>
     </div>
   );
 };

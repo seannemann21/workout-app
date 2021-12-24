@@ -28,7 +28,7 @@ StrengthSet.create(workout_exercise: users_inclined_bench, reps: 6, lbs: 135)
 StrengthSet.create(workout_exercise: users_inclined_bench, reps: 7, lbs: 135)
 StrengthSet.create(workout_exercise: users_inclined_bench, reps: 6, lbs: 135)
 
-cardio_workout = Workout.create(user: sean, workout_type: 'cardio', startedAt: DateTime.new(2020, 12, 31, 14), completed_at: DateTime.new(2020, 12, 31, 15))
+cardio_workout = Workout.create(user: sean, workout_type: 'cardio', started_at: DateTime.new(2020, 12, 31, 14), completed_at: DateTime.new(2020, 12, 31, 15))
 
 running = Exercise.create(name: 'running', workout_type: 'cardio', cardio: true)
 users_cardio = WorkoutExercise.create(exercise: running, workout: cardio_workout)

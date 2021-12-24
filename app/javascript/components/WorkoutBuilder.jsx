@@ -56,6 +56,7 @@ const WorkoutBuilder = () => {
   useEffect(() => {
     if (data) {
       setWorkout(data.fetchWorkout);
+      setSelectedExercise(data.fetchWorkout.possibleExercises[0])
     }
   }, [data]);
 
