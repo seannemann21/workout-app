@@ -8,7 +8,7 @@ import AddWorkoutExercise from "./AddWorkoutExercise";
 import { useUserSession } from "./userSesssion";
 
 const GET_WORKOUT_QUERY = gql`
-  query($id: ID!) {
+  query ($id: ID!) {
     fetchWorkout(id: $id) {
       id
       startedAt
@@ -32,7 +32,7 @@ const GET_WORKOUT_QUERY = gql`
 `;
 
 const COMPLETE_WORKOUT = gql`
-  mutation($id: ID!) {
+  mutation ($id: ID!) {
     completeWorkout(input: { id: $id }) {
       workout {
         id
@@ -41,27 +41,33 @@ const COMPLETE_WORKOUT = gql`
   }
 `;
 
+const ExerciseCard = ({ title }) => (
+  <div className="flex-col w-56">
+    <div className="h-20 bg-gray-600 flex justify-center items-center">
+      <div className="text-xl font-bold text-white">{title}</div>
+    </div>
+  </div>
+);
+
 const WorkoutBuilder = () => {
-  const { updateCurrentWorkout } = useUserSession()
+  const { updateCurrentWorkout } = useUserSession();
   const [workout, setWorkout] = useState();
   const [selectedExercise, setSelectedExercise] = useState();
   const { id } = useParams();
   const { data, refetch } = useQuery(GET_WORKOUT_QUERY, {
     variables: { id },
   });
-  const [sendCompleteWorkout, { data: completedData }] = useMutation(
-    COMPLETE_WORKOUT
-  );
+  const [sendCompleteWorkout, { data: completedData }] =
+    useMutation(COMPLETE_WORKOUT);
 
   useEffect(() => {
     if (data) {
       setWorkout(data.fetchWorkout);
-      setSelectedExercise(data.fetchWorkout.possibleExercises[0])
     }
   }, [data]);
 
   if (completedData) {
-    updateCurrentWorkout(null)
+    updateCurrentWorkout(null);
     return <Redirect to="/" />;
   }
 
@@ -103,14 +109,17 @@ const WorkoutBuilder = () => {
         </div>
       ))}
       <button onClick={completeWorkout}>Complete Workout</button>
-      <div>Add Exercise</div>
-      {workout.possibleExercises.map((exercise) => (
-        <div>
-          <button onClick={() => setSelectedExercise(exercise)}>
-            {exercise.name}
-          </button>
-        </div>
-      ))}
+      <div className="ml-4 text-3xl">Add Exercise</div>
+      <hr className="h-px ml-4 w-11/12" />
+      <div className="flex">
+        {workout.possibleExercises.map((exercise) => (
+          <div className="m-4">
+            <button onClick={() => setSelectedExercise(exercise)}>
+              <ExerciseCard title={exercise.name} />
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

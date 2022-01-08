@@ -1,6 +1,7 @@
 import React from "react";
 import { UserSessionProvider } from "./userSesssion";
 import AppRouter from "./AppRouter";
+import './App.css'
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
