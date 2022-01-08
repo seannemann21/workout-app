@@ -43,7 +43,7 @@ const COMPLETE_WORKOUT = gql`
 
 const ExerciseCard = ({ title }) => (
   <div className="flex-col w-56">
-    <div className="h-20 bg-gray-600 flex justify-center items-center">
+    <div className="h-20 bg-gray-500 hover:bg-gray-600 flex justify-center items-center">
       <div className="text-xl font-bold text-white">{title}</div>
     </div>
   </div>
@@ -108,9 +108,15 @@ const WorkoutBuilder = () => {
           </div>
         </div>
       ))}
-      <button onClick={completeWorkout}>Complete Workout</button>
-      <div className="ml-4 text-3xl">Add Exercise</div>
-      <hr className="h-px ml-4 w-11/12" />
+      <div className="flex border-b-2 ml-4 mr-4 justify-between w-9/12">
+        <div className="text-3xl">Add Exercise</div>
+        <button
+          onClick={completeWorkout}
+          className="bg-green-300 hover:bg-green-500 px-2 py-1 rounded-md text-xl bottom-1 relative"
+        >
+          Complete
+        </button>
+      </div>
       <div className="flex">
         {workout.possibleExercises.map((exercise) => (
           <div className="m-4">
